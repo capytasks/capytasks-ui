@@ -1,10 +1,8 @@
-import React, { useState, ChangeEvent, FormEvent } from 'react';
+// pages/Registration.tsx
+import React, { useState } from 'react';
+import '../App.css'; 
 
-interface RegistrationProps {
-  onRegister: (email: string, password: string) => void;
-}
-
-const Registration: React.FC<RegistrationProps> = ({ onRegister }) => {
+const Registration: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
@@ -23,40 +21,7 @@ const Registration: React.FC<RegistrationProps> = ({ onRegister }) => {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-
-    if (password !== repeatPassword) {
-      console.error('Passwords do not match');
-      // Handle password mismatch error, e.g., display an error message to the user
-      return;
-    }
-
-    try {
-      const response = await fetch('/api/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Registration failed');
-      }
-
-      // Assuming the server returns some data upon successful registration
-      const data = await response.json();
-
-      // You can handle the successful registration response here
-      console.log('Registration successful:', data);
-
-      // Optionally, clear email, password, and repeat password fields after registration
-      setEmail('');
-      setPassword('');
-      setRepeatPassword('');
-    } catch (error) {
-      console.error('Error registering:', error);
-      // Handle registration error, e.g., display an error message to the user
-    }
+    // Handle registration logic here
   };
 
   return (
@@ -95,4 +60,3 @@ const Registration: React.FC<RegistrationProps> = ({ onRegister }) => {
 };
 
 export default Registration;
-
