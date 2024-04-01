@@ -1,22 +1,21 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Header from './components/Header';
-import Footer from './components/Footer';
+import { BrowserRouter as Router, Routes, Route, BrowserRouter } from 'react-router-dom';
+import Layout from './components/Layout';
+import Home from './pages/Home';
 import Login from './pages/Login';
 import Registration from './pages/Registration';
 
 const App: React.FC = () => {
   return (
-    <Router>
-      <div className='app'>
-        <Header />
-        <Routes>
-          <Route path="/" element={<Login />} />
+<BrowserRouter>
+      <Routes>
+      <Route path="/" element={<Layout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Registration />} />
-        </Routes>
-        <Footer />
-      </div>
-    </Router>
+        </Route>
+    </Routes>
+  </BrowserRouter>
   );
 };
 
