@@ -1,14 +1,11 @@
 import React from 'react';
 import '../App.css';
 import { getTasks } from '../api';
-import Draggable, { DraggableEvent, DraggableData } from 'react-draggable'; // Import Draggable component and event types from react-draggable
 
 interface Task {
     id: number;
     name: string;
     description: string;
-    center_x: number;
-    center_y: number;
 }
 
 const Home: React.FC = () => {
@@ -18,8 +15,7 @@ const Home: React.FC = () => {
         const fetchData = async () => {
             try {
                 const data = await getTasks();
-                const tasksWithCoords = data.tasks.map((task: any) => ({ ...task }));
-                setTasks(tasksWithCoords);
+                setTasks(data.tasks);
             } catch (error) {
                 console.error('Error fetching tasks:', error);
             }
@@ -28,32 +24,17 @@ const Home: React.FC = () => {
         fetchData();
     }, []);
 
-    const handleDrag = (index: number, e: DraggableEvent, data: DraggableData) => {
-        setTasks(prevTasks => {
-            const updatedTasks = [...prevTasks];
-            updatedTasks[index] = { ...updatedTasks[index], center_x: data.x, center_y: data.y };
-            return updatedTasks;
-        });
-    };
-
     return (
         <div>
             <h2>Tasks</h2>
             <ul>
-                {tasks.map((task, index) => (
-                    <Draggable
-                        key={task.id}
-                        defaultPosition={{ x: task.center_x, y: task.center_y }}
-                        onStop={(e, data) => handleDrag(index, e, data)}
-                    >
-                        <li>
-                            <strong>{task.name}</strong>: {task.description}
-                        </li>
-                    </Draggable>
+                {tasks.map(task => (
+                    <li key={task.id}>
+                        <strong>{task.name}</strong>: {task.description}
+                    </li>
                 ))}
             </ul>
         </div>
     );
 };
-
 export default Home;

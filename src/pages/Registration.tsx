@@ -1,7 +1,6 @@
 // pages/Registration.tsx
 import React, { useState } from 'react';
 import '../App.css'; 
-import Logo from '../assets/2_logo_2_right.svg';
 
 const Registration: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -27,7 +26,6 @@ const Registration: React.FC = () => {
 
   return (
     <div className="login">
-      <div className='login-logo'><img src={Logo} alt="CapyTasks" /></div>
       <form onSubmit={handleSubmit}>
         <input
           type="email"
