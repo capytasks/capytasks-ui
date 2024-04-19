@@ -1,6 +1,7 @@
 // pages/Login.tsx
 import React, { useState } from 'react';
 import '../App.css'; 
+import Logo from '../assets/2_logo_2_right.svg';
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState('');
@@ -21,6 +22,7 @@ const Login: React.FC = () => {
 
   return (
     <div className="login">
+      <div className='login-logo'><img src={Logo} alt="CapyTasks" /></div>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
