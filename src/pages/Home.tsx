@@ -2,6 +2,7 @@ import React from 'react';
 import '../App.css';
 import { getTasks } from '../api';
 import Draggable, { DraggableEvent, DraggableData } from 'react-draggable'; // Import Draggable component and event types from react-draggable
+import SideBar from "../pages/SideBar";
 
 interface Task {
     id: number;
@@ -37,8 +38,10 @@ const Home: React.FC = () => {
     };
 
     return (
-        <div>
-            <h2>Tasks</h2>
+        <div className="main-wrapper">
+            <h2 className='main-wrapper__header'>CapyBoard</h2>
+            <div className='main-wrapper__capyboard'>
+            <SideBar />
             <ul>
                 {tasks.map((task, index) => (
                     <Draggable
@@ -52,6 +55,7 @@ const Home: React.FC = () => {
                     </Draggable>
                 ))}
             </ul>
+            </div>
         </div>
     );
 };
