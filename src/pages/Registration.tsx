@@ -3,6 +3,10 @@ import React, { useState } from 'react';
 import '../App.css'; 
 import Logo from '../assets/2_logo_2_right.svg';
 
+
+import Aos from "aos"
+import 'aos/dist/aos.css'
+
 const Registration: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -25,8 +29,12 @@ const Registration: React.FC = () => {
     // Handle registration logic here
   };
 
+  React.useEffect(()=> {
+    Aos.init({duration:2000})
+    }, [])
+
   return (
-    <div className="login">
+    <div data-aos="fade-up" className="login">
       <div className='login-logo'><img src={Logo} alt="CapyTasks" /></div>
       <form onSubmit={handleSubmit}>
         <input

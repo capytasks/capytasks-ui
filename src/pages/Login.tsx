@@ -3,9 +3,16 @@ import React, { useState } from 'react';
 import '../App.css'; 
 import Logo from '../assets/2_logo_2_right.svg';
 
+import Aos from "aos"
+import 'aos/dist/aos.css'
+
 const Login: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  React.useEffect(()=> {
+    Aos.init({duration:2000})
+    }, [])
 
   const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(event.target.value);
@@ -21,7 +28,7 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="login">
+    <div data-aos="fade-up" className="login">
       <div className='login-logo'><img src={Logo} alt="CapyTasks" /></div>
       <form onSubmit={handleSubmit}>
         <input

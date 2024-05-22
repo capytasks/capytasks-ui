@@ -5,6 +5,10 @@ import Draggable, { DraggableEvent, DraggableData } from 'react-draggable'; // I
 import SideBar from "../components/SideBar";
 import Popup from '../components/Popup';
 
+
+import Aos from "aos"
+import 'aos/dist/aos.css'
+
 interface Task {
     id: number;
     name: string;
@@ -14,6 +18,10 @@ interface Task {
 }
 
 const Home: React.FC = () => {
+
+    React.useEffect(()=> {
+        Aos.init({duration:2000})
+        }, [])
 
     const [showPopup, setShowPopup] = React.useState<boolean>(false);
 
@@ -55,17 +63,17 @@ const Home: React.FC = () => {
 
     return (
         <div className="main-wrapper">
-            <h2 className='main-wrapper__header'>CapyBoard</h2>
-            <div className='main-wrapper__capyboard'>
+            <h2 className='main-wrapper__header'></h2>
+            <div data-aos="fade-up" className='main-wrapper__capyboard'>
             <SideBar openPopup={togglePopup}/>
-            <ul>
+            <ul className='capyboard-tasks'>
                 {tasks.map((task, index) => (
                     <Draggable
                         key={task.id}
                         defaultPosition={{ x: task.center_x, y: task.center_y }}
                         onStop={(e, data) => handleDrag(index, e, data)}
                     >
-                        <li>
+                        <li className='capyboard-tasks__item'>
                             <strong>{task.name}</strong>: {task.description}
                         </li>
                     </Draggable>
