@@ -137,6 +137,24 @@ margin: 16px;
 	display: flex;
   }
 
+
+  .capyboard-tasks__item {
+	list-style: none;
+	padding: 15px 20px;
+	color: #FFFFFF;
+	-webkit-box-shadow: 1px -3px 23px 9px rgba(148,77,148,1);
+-moz-box-shadow: 1px -3px 23px 9px rgba(148,77,148,1);
+box-shadow: 1px -3px 23px 9px rgba(148,77,148,1);
+	border-radius: 10px;
+	cursor: pointer;
+  }
+
+  .capyboard-tasks__item:hover {
+	-webkit-box-shadow: 1px -3px 23px 9px rgb(70, 99, 158);
+-moz-box-shadow: 1px -3px 23px 9px rgb(70, 99, 158);
+box-shadow: 1px -3px 23px 9px rgb(70, 99, 158);
+  }
+
   .task-list {
 	width: 20%;
 	padding: 15px 20px;
@@ -173,7 +191,7 @@ box-shadow: 1px -3px 23px 9px rgba(148,77,148,1);
   }
 
   .task-list__item:hover {
-	
+	filter: drop-shadow(3px 3px 3px rgba(148,77,148,1))
   }
 
   .item__vectors {
