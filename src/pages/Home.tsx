@@ -2,7 +2,8 @@ import React from 'react';
 import '../App.css';
 import { getTasks } from '../api';
 import Draggable, { DraggableEvent, DraggableData } from 'react-draggable'; // Import Draggable component and event types from react-draggable
-import SideBar from "../pages/SideBar";
+import SideBar from "../components/SideBar";
+import Popup from '../components/Popup';
 
 interface Task {
     id: number;
@@ -13,6 +14,21 @@ interface Task {
 }
 
 const Home: React.FC = () => {
+
+    const [showPopup, setShowPopup] = React.useState<boolean>(false);
+
+    const togglePopup = () => {
+      setShowPopup(!showPopup);
+    };
+
+    const addTask = (name: string, description: string) => {
+        setTasks(prevTasks => {
+            const updatedTasks = [...prevTasks];
+            updatedTasks[updatedTasks.length] = { ...updatedTasks[updatedTasks.length], name: name, description: description};
+            return updatedTasks;
+        });
+    }
+
     const [tasks, setTasks] = React.useState<Task[]>([]);
 
     React.useEffect(() => {
@@ -41,7 +57,7 @@ const Home: React.FC = () => {
         <div className="main-wrapper">
             <h2 className='main-wrapper__header'>CapyBoard</h2>
             <div className='main-wrapper__capyboard'>
-            <SideBar />
+            <SideBar openPopup={togglePopup}/>
             <ul>
                 {tasks.map((task, index) => (
                     <Draggable
@@ -56,6 +72,7 @@ const Home: React.FC = () => {
                 ))}
             </ul>
             </div>
+            <Popup show={showPopup} handleClose={togglePopup} onSubmit={addTask}/>
         </div>
     );
 };
